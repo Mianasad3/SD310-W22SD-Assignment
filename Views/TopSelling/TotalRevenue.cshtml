@@ -1,0 +1,29 @@
+﻿@model MyTunes.Controllers.TotalRevenue
+
+@{
+    ViewData["Title"] = "Total Revenue";
+}
+
+<h1>Top Sellings</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <h4>Search Revenue</h4>
+        <form asp-action="TotalRevenue" method="post">
+             <input type="Date" asp-for="Date" class="form-control" />
+             <input type="submit" value="Search" class="btn-primary"/>
+         </form>
+    </div> 
+</div>
+@{
+    if(ViewBag.RevenueCalculated != null && ViewBag.RevenueCalculated == true)
+    {
+        <div class="row">
+            <div class="col-md-10">
+                <span>Total Revenue: @Model.Revenue</span> | Total Songs: @Model.Songs
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,68 @@
+﻿@model MyTunes.Models.TopSellingViewModel
+
+@{
+    ViewData["Title"] = "Top Selling";
+}
+
+<h1>Top Sellings</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <h4>Top Selling Song</h4>
+        @{
+            if(Model.TopSellingSong != null && !string.IsNullOrEmpty(Model.TopSellingSong.Title))
+            {
+                 <span>@Model.TopSellingSong.Title</span> <br />
+                 <span style="font-size:small">@Model.TopSellingSong.SoldCopies copies sold</span>
+            }
+        }
+    </div>
+     <div class="col-md-6">
+        <h4>Top Selling Artist</h4>
+        @{
+            if(Model.TopSellingSong != null && Model.TopSellingSong.Artist != null)
+            {
+                 <span>@Model.TopSellingSong.Artist.Name</span>
+            }
+        }
+       
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        @{
+            if(Model.TopRatedSongs != null && Model.TopRatedSongs.Count > 0)
+            {
+                <table class="table">
+                <thead>
+                    <tr>
+                    <th>Song</th>
+                    <th>AvgRating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.TopRatedSongs)
+                    {
+                     <tr>
+                     <td>@item.Key</td>
+                     <td>@item.Value</td>
+                     </tr>   
+                    }
+                    </tbody>
+                </table>
+            }
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

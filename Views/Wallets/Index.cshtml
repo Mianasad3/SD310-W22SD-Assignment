@@ -1,0 +1,54 @@
+﻿@model MyTunes.Models.Wallet
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User Wallet</h1>
+
+
+@{
+    if(ViewBag.ErrorMessage != null)
+    {
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+    }
+     if(ViewBag.SuccessMessage != null)
+    {
+        <span class="text-success">@ViewBag.SuccessMessage</span>
+    }
+}
+@{
+    if(Model == null)
+    {
+        <a asp-action="Create">Create New</a>
+
+        <form asp-action="GetUserWallet" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label  class="control-label">Select User</label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.Users" style="max-width:25%"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Get Wallet" class="btn btn-primary" />
+            </div>
+        </form>
+    }
+    else
+    {
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           <input type="hidden" asp-for="UserId">
+           <input type="hidden" asp-for="Id"> 
+            <div class="form-group">
+                <label  class="control-label">Wallet Balance</label>
+                <input type="number" asp-for="Balance" class ="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update Balance" class="btn btn-primary" />
+            </div>
+        </form>
+    }
+}
+  
+ 
